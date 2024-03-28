@@ -1,5 +1,5 @@
 A common attribute in image classification is translation invariance, meaning that a dog is a dog no matter where in the image it is. One way to bake this attribute into a classifier is to augment the training data by including images multiple times under differen shift transformations. In cases where the important features are near the boundaries of the image, this can lead to information loss. To circumvent this the donut augmentation is introduced, where the top and bottem and the left and right borders of the image are glued together creating a torus, similar to periodic boundary conditions in physics. 
-Below are images of an unshifted and a shifted image and of the image on a torus.
+Below are depictions of an unshifted and a shifted image and of the image on a torus.
 
 ![unshifted](images/unshifted.png) ![shifted](images/shifted.png)
 ![donut](images/donut.png)

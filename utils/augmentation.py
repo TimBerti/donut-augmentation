@@ -19,15 +19,15 @@ class DonutShift(torch.nn.Module):
         >>> img_shifted = shift(img)
     """
     def __init__(self, max_shift_h=None, max_shift_w=None):
-        self.max_shift_x = max_shift_h
-        self.max_shift_y = max_shift_w
+        self.max_shift_h = max_shift_h
+        self.max_shift_w = max_shift_w
 
     def __call__(self, img):
         _, h,w = get_dimensions(img)
-        max_shift_h = h if self.max_shift_x is None else self.max_shift_x
-        max_shift_w = w if self.max_shift_y is None else self.max_shift_y
+        max_shift_h = h if self.max_shift_h is None else self.max_shift_h
+        max_shift_w = w if self.max_shift_w is None else self.max_shift_w
 
-        shift_x = random.randint(0, max_shift_h)
-        shift_y = random.randint(0, max_shift_w)
+        shift_h = random.randint(0, max_shift_h)
+        shift_w = random.randint(0, max_shift_w)
 
-        return torch.roll(img, shifts=(shift_x, shift_y), dims=(1, 2))
+        return torch.roll(img, shifts=(shift_h, shift_w), dims=(2, 3))
