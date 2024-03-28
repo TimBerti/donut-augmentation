@@ -4,7 +4,20 @@ from torchvision.transforms.functional import get_dimensions
 
 
 class DonutShift(torch.nn.Module):
-    """Shift the image with periodic boundary conditions."""
+    """Shift the image with periodic boundary conditions.
+    
+    Args:
+        max_shift_h (int, optional): Maximum shift in the height direction. Defaults to None.
+        max_shift_w (int, optional): Maximum shift in the width direction. Defaults to None.
+
+    Returns:
+        torch.Tensor: Shifted image.
+
+    Example:
+        >>> img = torch.rand(3, 32, 32)
+        >>> shift = DonutShift(max_shift_h=4, max_shift_w=4)
+        >>> img_shifted = shift(img)
+    """
     def __init__(self, max_shift_h=None, max_shift_w=None):
         self.max_shift_x = max_shift_h
         self.max_shift_y = max_shift_w

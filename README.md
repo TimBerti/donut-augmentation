@@ -1,22 +1,12 @@
-# Periodic Boundary Condition Image Augmentation for CNNs
+A common attribute in image classification is translation invariance, meaning that a dog is a dog no matter where in the image it is. One way to bake this attribute into a classifier is to augment the training data by including images multiple times under differen shift transformations. In cases where the important features are near the boundaries of the image, this can lead to information loss. To circumvent this the donut augmentation is introduced, where the top and bottem and the left and right borders of the image are glued together creating a torus, similar to periodic boundary conditions in physics. 
+Below are images of an unshifted and a shifted image and of the image on a torus.
 
-## Overview
+![unshifted](images/unshifted.png) ![shifted](images/shifted.png)
+![donut](images/donut.png)
 
-This project introduces an approach to image augmentation for Convolutional Neural Networks (CNNs) using periodic boundary conditions. By treating images as if they were mapped onto a torus, this method allows for seamless shifts and rotations without loss of information, enhancing the robustness of CNN models to positional variances.
+When using an CNN and convolving over the torus, different shift transformations can be applied by choosing different starting points for the convolution, enabling data augmentation without information loss.
+The animation below shows the convolution of a kernel over an image on a torus. 
 
-## Background
+![convolution](images/convolution.gif)
 
-Traditional image augmentation techniques such as random cropping, rotation, and flipping can lead to the loss of critical features when objects of interest are near the edges of the image. This method aims to address this limitation by applying a concept inspired by periodic boundary conditions used in computational simulations. This ensures that all parts of an image are treated equally during the augmentation process, thereby preventing information loss and improving model generalization.
-
-## Implementation
-
-The key component of this approach is the implementation of periodic boundary conditions within the image preprocessing pipeline. Specifically, we extend the image in all directions, effectively mapping it onto the surface of a torus. This mapping allows any shifted version of the image to retain all original content, with parts that go beyond one edge reappearing on the opposite one.
-A periodic padding layer in the model ensures that convolution operations respect the topology of the torus, enabling seamless transitions across image boundaries.
-
-### Shift with Periodic Boundary Conditions
-
-This custom transformation applies random shifts to the image in both horizontal and vertical directions, with the shifted parts wrapping around the edges, maintaining the continuity of features.
-
-## Results
-
-Preliminary tests on the MNIST dataset have demonstrated the potential of this approach in enhancing the performance and generalization capabilities of CNN models, particularly in scenarios where object position variability is a significant factor.
+An implementation of the donut augmentation, that can be used within a PyTorch transformation pipeline, can be found in [utils/augmentation.py](utils/augmentation.py).
