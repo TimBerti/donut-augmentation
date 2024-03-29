@@ -30,7 +30,7 @@ class DonutShift():
         shift_h = random.randint(0, max_shift_h)
         shift_w = random.randint(0, max_shift_w)
 
-        return torch.roll(img, shifts=(shift_h, shift_w), dims=(2, 3))
+        return torch.roll(img, shifts=(shift_h, shift_w), dims=(1, 2))
     
 class PaddedShift():
     """Shift the image with zero padding.
@@ -71,7 +71,7 @@ class PaddedShift():
         orig_start_w = -min(shift_w, 0)
         orig_end_w = w - max(shift_w, 0)
 
-        output[:,:, start_h:end_h, start_w:end_w] = img[:,:, orig_start_h:orig_end_h, orig_start_w:orig_end_w]
+        output[:, start_h:end_h, start_w:end_w] = img[:, orig_start_h:orig_end_h, orig_start_w:orig_end_w]
 
         return output
 
