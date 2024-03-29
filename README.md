@@ -13,7 +13,7 @@ The following animation shows the convolution of a kernel over an image on a tor
 
 An implementation of donut augmentation that can be used in a PyTorch transformation pipeline can be found in [utils/augmentation.py](utils/augmentation.py).
 
-To demonstrate donut augmentation, two CNNs are trained on the MNIST dataset. The CNNs have the same architecture, with the only difference being that the regular CNN uses zero padding in the convolutional layers and the data is augmented using shift transformations, while the other CNN, called DonutCNN, uses periodic padding and the data is augmented using donut augmentation.  
+To demonstrate donut augmentation, two CNNs are trained on the MNIST dataset. The CNNs have the same architecture, with the only difference being that the regular CNN uses zero padding in the convolutional layers and the training data is augmented using shift transformations, while the other CNN, called DonutCNN, uses periodic padding and the training data is augmented using donut augmentation.  
 The test accuracies of both CNNs over the maximum number of shifts are shown below.
 
 ![comparison](images/comparison.png)
